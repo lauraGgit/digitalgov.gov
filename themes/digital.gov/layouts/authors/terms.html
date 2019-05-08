@@ -38,7 +38,7 @@
                         {{- end -}}
                       </div>
                     </div>
-                    <div class="grid-col-9">
+                    <div class="grid-col-11 display-flex flex-justify flex-align-center">
                       <div class="details">
                         <h5>
                           <a href="{{- $link | absURL -}} " title="Posts by {{- .Params.display_name | default $slug -}} " rel="author">
@@ -50,6 +50,13 @@
                         <p>{{- .Params.agency -}}{{- if .Params.location -}}&nbsp;|&nbsp;{{- .Params.location -}}{{- end -}}</p>
                         {{- end -}}
 
+                      </div>
+                      <div class="count">
+                        {{ if gt $author.Count 1 }}
+                        <a href="{{- $link | absURL -}}" title="Posts by {{- .Params.display_name | default $slug -}}"><strong>{{ $author.Count }}</strong> contributions</a>
+                        {{ else }}
+                        <a href="#"><strong>{{ $author.Count }}</strong> contribution</a>
+                        {{ end }}
                       </div>
                     </div>
                   </div>
