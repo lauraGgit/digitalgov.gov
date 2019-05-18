@@ -50,26 +50,34 @@ body > .paper.testing{
 
   @include at-media('card'){
     @include u-bg('red-warm-20');
+    background-image: url('/img/width-card.png');
   }
   @include at-media('card-lg'){
     @include u-bg('red-20');
+    background-image: url('/img/width-card-lg.png');
   }
   @include at-media('mobile'){
     @include u-bg('red-cool-20');
+    background-image: url('/img/width-mobile.png');
   }
   @include at-media('mobile-lg'){
     @include u-bg('blue-warm-20');
+    background-image: url('/img/width-mobile-lg.png');
   }
   @include at-media('tablet'){
     @include u-bg('orange-20');
+    background-image: url('/img/width-tablet.png');
   }
   @include at-media('tablet-lg'){
     @include u-bg('gold-20');
+    background-image: url('/img/width-tablet-lg.png');
   }
   @include at-media('desktop'){
     @include u-bg('yellow-20');
+    background-image: url('/img/width-desktop.png');
   }
   @include at-media('desktop-lg'){
     @include u-bg('green-warm-20');
+    background-image: url('/img/width-desktop-lg.png');
   }
 }
