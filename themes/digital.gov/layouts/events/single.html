@@ -105,7 +105,7 @@
     {{- end -}}
 
 
-    <section class="content">
+    <section>
       <div class="grid-container grid-container-desktop">
         <div class="grid-row grid-gap-4">
           <div class="grid-col-12 tablet:grid-col-9">
@@ -117,7 +117,9 @@
             {{- end -}}
 
             {{/* Content of the event page  */}}
-            {{- .Content -}}
+            <div class="content">
+              {{- .Content -}}
+            </div>
 
           </div>
 
