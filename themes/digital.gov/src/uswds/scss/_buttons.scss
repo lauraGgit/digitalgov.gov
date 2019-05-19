@@ -39,7 +39,7 @@ a.btn{
 
 
 .actions{
-  @include u-margin-bottom(3);
+  @include u-margin-bottom(0);
   @include u-display('flex');
   .btn{
     @include u-radius(0);
