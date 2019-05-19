@@ -2,6 +2,7 @@
 
 .edit-this{
   position: relative;
+  @include u-z('top');
   @include u-bg('yellow-5');
   .edit_this_btn{
     position: absolute;

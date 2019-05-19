@@ -8,7 +8,7 @@ header#header{
 	}
 	@include u-position('sticky');
 	@include u-top(0);
-	@include u-z(100);
+	@include u-z('top');
 	@include u-bg('white');
 
 	// Logo
