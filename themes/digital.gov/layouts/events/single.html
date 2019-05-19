@@ -46,40 +46,34 @@
 
             <p class="host">Hosted by {{ .Params.host }} and {{ .Params.event_organizer }}</p>
             {{- end -}}
+
+            {{/* EVENT Actions — REGISTER and Add to Calendar */}}
+            {{/* If is a Future Event */}}
+            {{- if eq $future_event true -}}
+            <div class="actions">
+              {{/* Register */}}
+              <a class="btn btn-register" href="{{- .Params.registration_url -}}" onclick="__gaTracker('send', 'event', 'outbound-article', '{{- .Params.registration_url -}}', 'REGISTER NOW');">Register</a>
+
+              <span class="addtocalendar">
+                <a class="atcb-link" title="Add to calendar"><i class="far fa-calendar-plus"></i> Add to Cal</a>
+                <var class="atc_event">
+                  <var class="atc_date_start">{{- $event_startDate -}}</var>
+                  <var class="atc_date_end">{{- $event_endDate -}}</var>
+                  <var class="atc_timezone">America/New_York</var>
+                  <var class="atc_title">{{- $event_title -}}</var>
+                  <var class="atc_description">{{- htmlUnescape $event_description | safeHTML -}}</var>
+                  <var class="atc_location">{{- $event_location -}}</var>
+                  <var class="atc_organizer">Digital.gov</var>
+                  <var class="atc_organizer_email">digitalgov@gsa.gov</var>
+                </var>
+              </span>
+            </div>
+            {{- end -}}
+            
           </div>
         </div>
       </div>
     </header>
-
-
-    {{/* EVENT Actions — REGISTER and Add to Calendar */}}
-    {{/* If is a Future Event */}}
-    {{- if eq $future_event true -}}
-    <div class="grid-container grid-container-desktop">
-      <div class="grid-row">
-        <div class="grid-col-12">
-          <div class="actions">
-            {{/* Register */}}
-            <a class="btn btn-register" href="{{- .Params.registration_url -}}" onclick="__gaTracker('send', 'event', 'outbound-article', '{{- .Params.registration_url -}}', 'REGISTER NOW');">Register</a>
-
-            <span class="addtocalendar">
-              <a class="atcb-link" title="Add to calendar"><i class="far fa-calendar-plus"></i> Add to Cal</a>
-              <var class="atc_event">
-                <var class="atc_date_start">{{- $event_startDate -}}</var>
-                <var class="atc_date_end">{{- $event_endDate -}}</var>
-                <var class="atc_timezone">America/New_York</var>
-                <var class="atc_title">{{- $event_title -}}</var>
-                <var class="atc_description">{{- htmlUnescape $event_description | safeHTML -}}</var>
-                <var class="atc_location">{{- $event_location -}}</var>
-                <var class="atc_organizer">Digital.gov</var>
-                <var class="atc_organizer_email">digitalgov@gsa.gov</var>
-              </var>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{- end -}}
 
 
     {{/* EVENT Stage
