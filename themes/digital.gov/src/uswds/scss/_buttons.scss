@@ -99,7 +99,10 @@ a.btn{
 }
 
 .actions-stacked{
-  @include u-display('block');
+  @include u-display('none');
+	@include at-media('tablet'){
+		@include u-display('block');
+	}
   .btn{
     @include u-display('block');
     @include u-padding-x(1);

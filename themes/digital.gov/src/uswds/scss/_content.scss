@@ -2,7 +2,7 @@
 
 .content{
   @include u-font('sans', 'md');
-
+  @include u-padding-bottom(5);
   a{
     @include u-text('no-underline');
     &:hover{
