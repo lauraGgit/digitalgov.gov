@@ -80,4 +80,8 @@ body > .paper.testing{
     @include u-bg('green-warm-20');
     background-image: url('/img/width-desktop-lg.png');
   }
+  @include at-media('widescreen'){
+    @include u-bg('green-warm-40');
+    background-image: url('/img/width-widescreen.png');
+  }
 }
