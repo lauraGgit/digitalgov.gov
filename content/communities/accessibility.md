@@ -13,7 +13,7 @@ community_list:
   - type: "listserv"
     subscribe_email: section.508@gsa.gov
     subject: "Join: Accessibility / Section 508"
-community_managers:
+authors:
   - john-sullivan
 
 ---

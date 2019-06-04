@@ -50,18 +50,20 @@
       @include u-font('sans', '3xs');
     }
   }
-  .community_managers{
-    @include u-padding(2);
-    h3{
-      @include u-margin(0);
-      @include u-font('sans', 'sm');
-    }
-  }
   .community_admin{
     @include u-padding-x(2);
-    @include u-padding-y(1);
-    // @include u-bg('gray-warm-10');
+    @include u-padding-y(2);
     @include u-font('sans', '3xs');
+
+    .listserv-links{
+      a{
+        @include u-text('no-underline');
+        &:hover{
+          @include u-text('underline');
+        }
+      }
+
+    }
   }
 
 }
