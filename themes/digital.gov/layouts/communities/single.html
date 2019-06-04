@@ -79,13 +79,11 @@
 
               {{- end -}}
 
-              {{- if .Params.community_managers -}}
-              <div class="community_managers">
-                {{- partial "core/get_authors" . -}}
-              </div>
-              {{- end -}}
-
               <div class="community_admin">
+                {{- if .Params.authors -}}
+                {{- partial "core/get_authors" . -}}
+                {{- end -}}
+
                 {{- if $.Params.members -}}
                   <p class="members"><i class="far fa-user"></i> {{ $.Params.members }} members
                   {{- if $.Params.emails_per_week }}
