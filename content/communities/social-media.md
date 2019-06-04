@@ -18,7 +18,7 @@ community_list:
   - type: "listserv"
     subscribe_email: SM-COP-subscribe-request@listserv.gsa.gov
     subject: "Join #SocialGov"
-community_managers:
+authors:
   - jherman
 ---
 

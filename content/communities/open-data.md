@@ -17,7 +17,7 @@ community_list:
   - type: "listserv"
     subscribe_email: listserv@listserv.gsa.gov
     subject: "subscribe Open Data"
-community_managers:
+authors:
   - pashlock
   - hyon-kim
 ---

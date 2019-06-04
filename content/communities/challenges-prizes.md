@@ -21,7 +21,7 @@ community_list:
     subject: "Join Challenges"
     body: "your name + agency you work for"
 
-community_managers:
+authors:
   - tammy-white
   - eric-beidel
   - stephanie-green

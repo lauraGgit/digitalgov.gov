@@ -21,7 +21,7 @@ community_list:
     subject: "Join: Multilingual"
     terms: "All government employees (federal, state, local, tribal) or contractors with a .gov or .mil email address are eligible to join."
     form: "https://docs.google.com/forms/d/e/1FAIpQLSfUmDyzqqzRnvh1pAuPzZsYg-3BIwT7H6xVt-c7r4eHfjum_A/viewform?formkey=dHI0aTEwWXh2NURMR0gzR3ozVlJ2T2c6MQ"
-community_managers:
+authors:
   - lgodfrey
 members: 225
 emails_per_week: 1.33

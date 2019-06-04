@@ -19,7 +19,7 @@ community_list:
   - type: "google-group"
     terms: "This community is open to anyone."
     form: "https://groups.google.com/forum/?nomobile=true#!forum/us-government-apis"
-community_managers:
+authors:
   - gray-brooks
 ---
 

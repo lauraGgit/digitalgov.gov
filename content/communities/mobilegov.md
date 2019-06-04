@@ -16,7 +16,7 @@ community_list:
     email: MOBILEGOV@listserv.gsa.gov
     subject: "Subscribe to MobileGov"
 
-community_managers:
+authors:
   - jparcell
   - david-fern
 

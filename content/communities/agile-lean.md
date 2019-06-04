@@ -12,7 +12,7 @@ weight: 2
 topics:
   - agile
   - product-management
-  
+
 aliases:
   - /agile-lean-community-of-practice/
 
@@ -20,7 +20,7 @@ community_list:
   - type: "listserv"
     subscribe_email: listserv@listserv.gsa.gov
     body: "subscribe agile-lean-cop"
-community_managers:
+authors:
   - logan-powell
   - bbrantley
 
