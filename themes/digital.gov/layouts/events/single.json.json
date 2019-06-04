@@ -117,6 +117,18 @@
         {{- end -}}
         },
       {{- end -}}
+      {{- if (isset .Params "aliases") -}}
+        "aliases" : {
+        {{/* For each of the aliases,... */}}
+        {{- range $i, $e := .Params.aliases -}}
+          {{ if lt (add $i 1) $length }}
+          "{{- $i -}}" : "{{- $e }}",
+          {{- else }}
+          "{{- $i -}}" : "{{- $e }}"
+          {{ end }}
+        {{- end -}}
+        },
+      {{- end -}}
       "content" : {{- .Content | jsonify -}},
       "branch" : {{ $.Scratch.Get "branch" | jsonify }},
       "filename" : {{ .File.LogicalName | jsonify }},
