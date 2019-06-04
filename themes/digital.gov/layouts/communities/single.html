@@ -30,6 +30,7 @@
             <section class="community-info {{ .Params.community_type -}}">
 
               {{- range $i, $e := .Params.community_list -}}
+                {{- $.Scratch.Set "community_type" $e.type -}}
                 <div class="join-box">
 
                   <!-- Join by email -->
@@ -90,7 +91,13 @@
                    <br/> <i class="far fa-envelope"></i> Avg. {{ $.Params.emails_per_week }} emails per week{{- end -}}</p>
                 {{- end -}}
 
+                <!-- Hide community admin tools for Google Groups -->
+                {{- $type := $.Scratch.Get "community_type" -}}
+                {{- if eq $type "google-group" -}}
+                <p class="listserv-links"><a href="https://groups.google.com/a/gsa.gov/forum/#!overview" title="Manage Your Listserv Subscription">Manage Your Google Group Settings</a></p>
+                {{- else -}}
                 <p class="listserv-links"><a href="https://digital.gov/communities/manage-your-subscription/" title="Manage Your Listserv Subscription">Manage Your Listserv Subscription</a><br/><a href="https://digital.gov/communities/manage-your-subscription#Access-Listserv-Archive" title="Access the Listserv Archive">Access the Listserv Archive</a></p>
+                {{- end -}}
               </div>
 
             </section>
