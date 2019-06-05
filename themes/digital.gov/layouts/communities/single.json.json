@@ -41,6 +41,26 @@
       {{- else -}}
       "date_modified" : "{{- .LastMod.Format "2006-01-02T15:04:05Z07:00" -}}",
       {{- end -}}
+      {{- if (isset .Params "community_list") -}}
+        "community_list" : {
+        {{- range $index, $list_type := .Params.community_list -}}
+        {{- $length := $list_type | len -}}
+          "ffffffffff{{- $index -}}" : {
+          {{- range $i, $e := $list_type -}}
+            {{ $.Scratch.Add "num" 1 }}
+            {{ $num := $.Scratch.Get "num" }}
+            {{- $slug := . -}}
+            {{- if eq $length $num -}}
+              "{{- $slug -}}" : "{{- $e -}}"
+              {{- $.Scratch.Set "num" 1 -}}
+            {{- else -}}
+              "{{- $slug -}}" : "{{- $e }}",
+            {{- end -}}
+          {{- end -}}
+          },
+        {{- end -}}
+        },
+      {{- end -}}
       {{- if (isset .Params "members") -}}
       "members" : "{{- .Params.members -}}",
       {{- end -}}
