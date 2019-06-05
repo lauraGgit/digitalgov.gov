@@ -45,7 +45,7 @@
         "community_list" : {
         {{- range $index, $list_type := .Params.community_list -}}
         {{- $length := $list_type | len -}}
-          "ffffffffff{{- $index -}}" : {
+          "{{- $index -}}" : {
           {{- range $i, $e := $list_type -}}
             {{ $.Scratch.Add "num" 1 }}
             {{ $num := $.Scratch.Get "num" }}
