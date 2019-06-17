@@ -1,0 +1,22 @@
+{{- if .Params.featured_image -}}
+{{/* Featured_image call */}}
+  {{- $cdnurl := .Site.Params.cdnurl -}}
+  {{- $dg_filename := print "digitalgov-card-" (index (seq 3 | shuffle) 0) -}}
+  {{- $featImg := index $.Site.Data.images (default $dg_filename .Params.featured_image.uid) -}}
+  {{- $featImgBase := $featImg.uid -}}
+  {{- $featImgExt := $featImg.format -}}
+  {{- $featImgBaseCDN := printf "%s/%s" $cdnurl $featImgBase -}}
+  {{- $featImgWidth := $featImg.width -}}
+  {{- $featImgHeight := $featImg.height -}}
+  {{- $.Scratch.Set "featImgSuffix" "" -}}
+  {{- if gt $featImgWidth 1200 -}}
+   {{- $.Scratch.Set "featImgSuffix" "_w1200" -}}
+  {{- end -}}
+  {{- if gt $featImgWidth 800 -}}
+   {{- $.Scratch.Set "featImgTwitterSuffix" "_w800" -}}
+  {{- end -}}
+  {{- $featImgURL := printf "%s%s.%s" $featImgBaseCDN ($.Scratch.Get "featImgSuffix") $featImgExt -}}
+{{/* End featured_image call */}}
+{{- end -}}
+
+{{- $featImgURL := "hello" -}}
