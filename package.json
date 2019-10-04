@@ -21,6 +21,7 @@
     "acorn": "^6.0.4",
     "autoprefixer": "^9.1.5",
     "braces": "^2.3.2",
+    "change-case": "^3.1.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.4",
     "del": "^3.0.0",
@@ -29,16 +30,23 @@
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
+    "gulp-replace-name": "^1.0.1",
+    "gulp-s3-upload": "^1.7.3",
     "gulp-sass": "^4.0.1",
     "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-tap": "^2.0.0",
+    "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.0",
+    "image-size": "^0.8.3",
     "path": "^0.12.7",
     "postcss": "^7.0.17",
     "postcss-uncss": "^0.16.1",
+    "sharp": "^0.23.1",
     "uncss": "^0.16.2",
     "uswds": "^2.1.0",
-    "uswds-gulp": "github:uswds/uswds-gulp"
+    "uswds-gulp": "github:uswds/uswds-gulp",
+    "vinyl-paths": "^3.0.0"
   },
   "dependencies": {
     "octicons": "^7.3.0"

@@ -36,3 +36,12 @@ or
 `hugo serve --config=config_dev.yml` _(can take 20 secs to launch but only builds a portion of the content)_
 
 **visit** http://localhost:1313/
+
+
+## Processing images
+
+If you are interested in processing images for Digital.gov locally, you will need to install `vips` before running `npm install`
+
+```
+brew install vips
+```

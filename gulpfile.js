@@ -1,5 +1,5 @@
 var gulp = require("gulp");
-// require('./config/gulp/images');
+require('./config/gulp/images');
 require('./config/gulp/uswds');
 
 
