@@ -16,57 +16,11 @@ var gulp          = require("gulp"),
     fs            = require("fs"),
     glob          = require("glob"),
     path          = require("path"),
-    sharp         = require("sharp")
+    sharp         = require("sharp"),
 
     // upload
-    s3config      = {
-                    accessKeyId: process.env.AWS_ACCESSKEY,
-                    secretAccessKey: process.env.AWS_SECRET
-                  },
+    s3config      = JSON.parse(fs.readFileSync('.env')),
     s3            = require('gulp-s3-upload')(s3config);
-
-
-    // replace       = require("gulp-replace-name"),
-    // rename        = require("gulp-rename"),
-    // vinylPaths    = require('vinyl-paths'),
-    // del           = require("del"),
-    // tap           = require('gulp-tap'),
-    // responsive    = require('gulp-responsive');
-
-
-
-    // path          = require('path'),
-    // // gutil         = require('gulp-util'),
-    // watch         = require('gulp-watch'),
-    // replace       = require("gulp-replace-name"),
-    // sass          = require("gulp-sass"),
-    // autoprefixer  = require("autoprefixer"),
-    // hash          = require("gulp-hash"),
-    // del           = require("del"),
-    // concat        = require('gulp-concat'),
-    // cleanCSS      = require('gulp-clean-css'),
-    // cssnano       = require('cssnano'),
-    // sourcemaps    = require('gulp-sourcemaps'),
-    // postcss       = require('gulp-postcss'),
-    // mqpacker      = require('css-mqpacker'),
-    // combineMq     = require('gulp-combine-mq'),
-    // strip         = require('gulp-strip-css-comments'),
-    // bless         = require('gulp-bless'),
-    // gzip          = require('gulp-gzip'),
-    // size          = require('gulp-size'),
-    // changeCase    = require('change-case'),
-    // responsive    = require('gulp-responsive'),
-    // tap           = require('gulp-tap'),
-    // rename        = require("gulp-rename"),
-    // fs            = require('graceful-fs'),
-    // sizeOf        = require('image-size'),
-    // dotenv        = require('dotenv').config(),
-    // s3config      = {
-    //                 accessKeyId: process.env.AWS_ACCESSKEY,
-    //                 secretAccessKey: process.env.AWS_SECRET
-    //               },
-    // s3            = require('gulp-s3-upload')(s3config),
-    // cp            = require('child_process');
 
 
 // specify transforms
@@ -302,7 +256,7 @@ gulp.task("resize", gulp.series('write-file', function(done){
 
 
 gulp.task("upload", gulp.series('resize', function (done) {
-  return gulp.src("content/images/_working/processed/**/*")
+  gulp.src("content/images/_working/processed/**/*")
     .pipe(s3({
       Bucket: 'digitalgov',   //  Required
       ACL:    'public-read'   //  Needs to be user-defined
@@ -310,8 +264,7 @@ gulp.task("upload", gulp.series('resize', function (done) {
       // S3 Constructor Options, ie:
       maxRetries: 5
     }))
-
-    .pipe(gulp.dest("content/images/_working/uploaded/"));
+  ;
 }));
 
 
