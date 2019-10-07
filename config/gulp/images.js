@@ -1,5 +1,8 @@
 var gulp          = require("gulp"),
 
+    // logging
+    log            = require("fancy-log"),
+
     // file-tidy
     replace       = require("gulp-replace-name"),
     rename        = require("gulp-rename"),
@@ -94,19 +97,6 @@ const dg_image_sizes = [
   }
 ];
 
-// specify transforms
-const dg_proxy_image_sizes = [
-  {
-    src: "content/images/_working/to-process/*",
-    dist: "content/images/_working/processed/",
-    options: {
-      width: 200,
-      suffix: '_w200',
-      quality: 1,
-      format: 'png'
-    }
-  }
-];
 
 
 function get_curr_date(){
@@ -123,41 +113,6 @@ function get_curr_date(){
   return output;
 }
 
-function get_image_uid(path){
-  var uid = /([^\/]+)(?=\.\w+$)/g; // gets the slug/filename from the path
-  return path.match(uid);
-}
-
-function get_image_format(path){
-  var format = path.split('.').pop(); // gets the file extension from the path
-  return format;
-}
-
-function get_image_data(uid, width, height, format){
-  console.log('getting the image data...');
-  console.log('uid: ' + uid);
-  console.log('width: ' + width);
-  console.log('height: ' + height);
-  console.log('format: ' + format);
-  var data = [
-    "date     : " + get_curr_date(),
-    "uid      : " + uid,
-    "width    : " + width,
-    "height   : " + height,
-    "format   : " + format,
-    "credit   : \"\"",
-    "caption  : \"\"",
-    "alt      : \"\""
-  ].join("\n");
-  return data;
-}
-
-function get_image_sq(path){
-  var dimensions = sizeOf(path); // gets the file extension from the path
-  var sq_dim = Math.min(dimensions.width, dimensions.height);
-  return sq_dim;
-}
-
 
 // Cleans up the file names before processing them
 // You'd be surprised what people put in file names these days...
@@ -171,10 +126,16 @@ gulp.task("file-tidy", function (done) {
     .pipe(replace(/^\d{2,4}-*x-*\d{2,4}-*/g, ''))      // strip leading dimensions
     .pipe(replace(/-\./g, '.'))                   // remove leading dashes
     .pipe(replace(/^-/g, ''))                     // removes dashes from the start of filename
+
     .pipe(rename(function(path) { // make filename lowercase
+      log('----------');
+      log('Cleaning up filename');
+      log('- from: ' + path.basename + path.extname);
       path.basename = changeCase.lowerCase(path.basename);
       path.extname = changeCase.lowerCase(path.extname);
+      log('- to: ' + path.basename + path.extname);
     }))
+
     // Copies the original image to two new folders in content/images/_working/
     .pipe(gulp.dest("content/images/_working/originals/"))
     .pipe(gulp.dest("content/images/_working/to-process/"))
@@ -189,27 +150,44 @@ gulp.task("clean-inbox", gulp.series('file-tidy', function(done){
 gulp.task("write-file", gulp.series('clean-inbox', function(done){
   return gulp.src("content/images/_working/to-process/*.{png,jpg,jpeg,JPG,JPEG,PNG}")
     .pipe(tap(function (file) {
-      var uid = get_image_uid(file.path);
-      var format = get_image_format(file.path);
+      var uid = /([^\/]+)(?=\.\w+$)/g; // gets the slug/filename from the path
+      var uid = file.path.match(uid);
+      log('----------');
+      log('Getting image Data:');
+      log('- uid: ' + uid);
       var dimensions = sizeOf(file.path);
-      fs.writeFile('content/images/'+ uid +'.yml', get_image_data(uid, dimensions.width, dimensions.height, format), function(){
+      log('- width: ' + dimensions.width);
+      log('- height: ' + dimensions.height);
+      var format = file.path.split('.').pop();
+      log('- format: ' + format);
+      var image_data = [
+        "date     : " + get_curr_date(),
+        "uid      : " + uid,
+        "width    : " + dimensions.width,
+        "height   : " + dimensions.height,
+        "format   : " + format,
+        "credit   : \"\"",
+        "caption  : \"\"",
+        "alt      : \"\""
+      ].join("\n");
+      log('writing data file: data/images/'+ uid +'.yml ...');
+      fs.writeFile('content/images/'+ uid +'.yml', image_data, function(){
       });
+      log('----------');
     }))
 }));
 
-
-gulp.task("resize", gulp.series('write-file', function(done){
-  // resizeImages(dg_image_sizes);
-  // loop through configuration array of objects
-  dg_image_sizes.forEach(function(transform) {
-    // if dist folder does not exist, create it with all parent folders
-    if (!fs.existsSync(transform.dist)) {
-      fs.mkdirSync(transform.dist, { recursive: true }, (err) => {
-        if (err) throw err;
-      });
-    }
+function resizeImages(data){
+  return data.forEach(function(transform) {
 
     if (transform.src) {
+      // if dist folder does not exist, create it with all parent folders
+      if (!fs.existsSync(transform.dist)) {
+        fs.mkdirSync(transform.dist, { recursive: true }, (err) => {
+          if (err) throw err;
+        });
+      }
+
       // glob all files
       let files = glob.sync(transform.src);
       // for each file, apply transforms and save to file
@@ -221,6 +199,8 @@ gulp.task("resize", gulp.series('write-file', function(done){
         image
           .metadata()
           .then(function(metadata) {
+            log('----------');
+            log('cropping w'+ transform.options.width);
             // if the image is greater than or equal to the crop size
             if (metadata.width >= transform.options.width) {
               return image
@@ -230,25 +210,92 @@ gulp.task("resize", gulp.series('write-file', function(done){
                 .catch(err => {
                   console.log(err);
                 });
+            } else {
+              log('skipping w' + transform.options.width);
             }
           })
           .then(function(data) {
             // data contains a WebP image half the width and height of the original JPEG
           });
       });
+    } else {
+      log('there are no images!');
     }
   });
-  done();
+}
+
+gulp.task("resize-all", gulp.series('file-tidy', function(done){
+  return Promise.all([
+    new Promise(function(resolve, reject) {
+      gulp.src(src + '/*.md')
+        .pipe(resizeImages(dg_image_sizes))
+        .on('error', reject)
+        .pipe(gulp.dest(dist))
+        .on('end', resolve)
+    }),
+  ]).then(function () {
+    // Other actions
+  });
 }));
 
-gulp.task("proxy-img", gulp.series('resize', function(done){
-  resizeImages(dg_proxy_image_sizes);
-  done();
+gulp.task("resize", gulp.series('file-tidy', function(done){
+  return gulp.src('content/images/_working/processed/*')
+  // return new Promise(function(resizeImages, reject) {
+    // resizeImages(dg_image_sizes);
+    // console.log("resizeImages");
+    // loop through configuration array of objects
+    // console.log('starting resize');
+    dg_image_sizes.forEach(function(transform) {
+
+      if (transform.src) {
+        // if dist folder does not exist, create it with all parent folders
+        if (!fs.existsSync(transform.dist)) {
+          fs.mkdirSync(transform.dist, { recursive: true }, (err) => {
+            if (err) throw err;
+          });
+        }
+
+        // glob all files
+        let files = glob.sync(transform.src);
+        // for each file, apply transforms and save to file
+        files.forEach(function(file) {
+          let ext = path.extname(file); // gets the current file extension
+          let newext = '.png';
+          let filename = path.basename(file, ext); // gets the filename, without the extension
+          const image = sharp(file);
+          image
+            .metadata()
+            .then(function(metadata) {
+              log('----------');
+              log('cropping w'+ transform.options.width);
+              // if the image is greater than or equal to the crop size
+              if (metadata.width >= transform.options.width) {
+                return image
+                  .resize(transform.options) // resizes the image
+                  .toFormat(transform.options.format)
+                  .toFile(`${transform.dist}/${filename}${transform.options.suffix}${newext}`)
+                  .catch(err => {
+                    console.log(err);
+                  });
+              } else {
+                log('skipping w' + transform.options.width);
+              }
+            })
+            .then(function(data) {
+              // data contains a WebP image half the width and height of the original JPEG
+            });
+        });
+      } else {
+        log('there are no images!');
+      }
+    });
+    // done();
+    // return 'done';
 }));
 
 // Upload the images to S3
 gulp.task("upload", gulp.series('resize', function (done) {
-  gulp.src("content/images/_working/processed/**/*")
+  return gulp.src("content/images/_working/processed/*", {buffer:false})
     .pipe(s3({
       Bucket: 'digitalgov',   //  Required
       ACL:    'public-read'   //  Needs to be user-defined
@@ -260,58 +307,6 @@ gulp.task("upload", gulp.series('resize', function (done) {
 }));
 
 
-gulp.task("proxy", gulp.series('upload', function (done) {
-  // - - - - - - - - - - - - - - - - -
-  // Create lorez version for Hugo to parse
-  return gulp.src("content/images/_working/originals/*.{png,jpg}")
-    .pipe(responsive({
-      '*': {
-        rename: {
-          suffix: '',
-          extname: '.jpg',
-        },
-        grayscale: true,
-        quality: 1,
-        flatten: true,
-        blur: true,
-      },
-    }, {
-      // Global configuration for all images
-      progressive: true,
-      withMetadata: false,
-      errorOnUnusedConfig: false,
-      skipOnEnlargement: true,
-      errorOnEnlargement: false,
-      silent: true,
-    }))
-    .pipe(responsive({
-      '*': {
-        rename: {
-          suffix: '',
-          extname: '.jpg',
-        },
-        grayscale: true,
-        quality: 1,
-        flatten: true,
-        blur: true,
-      },
-    }, {
-      // Global configuration for all images
-      progressive: true,
-      withMetadata: false,
-      errorOnUnusedConfig: false,
-      skipOnEnlargement: true,
-      errorOnEnlargement: false,
-      silent: true,
-    }))
-    .pipe(gulp.dest("static/img/proxy/"));
-}));
-
-gulp.task("done", gulp.series('proxy', function (done) {
-  return gulp.src("content/images/_working/originals/*")
-    .pipe(gulp.dest("content/images/uploaded/"));
-}));
-
-gulp.task("cleanup", gulp.series('done', function (done) {
-  // return del(['content/images/_working/**']);
+gulp.task("cleanup", gulp.series('upload', function (done) {
+  return del(['content/images/_working/**']);
 }));
