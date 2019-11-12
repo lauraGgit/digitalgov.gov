@@ -18,7 +18,7 @@ tag:
 </p>
 
 <p dir="ltr">
-  We call it the <a title="Web Content Managers Forum" href="{{< link "web-managers-forum.md" >}}">User Experience Community</a>, and all federal employees who are interested in usability testing are welcome to join. We have a monthly conference call where we share resources, tips and stories from our experiences. Hope to see you at the next one.
+  We call it the <a title="Web Content Managers Forum" href="{{< link "web-content-managers.md" >}}">User Experience Community</a>, and all federal employees who are interested in usability testing are welcome to join. We have a monthly conference call where we share resources, tips and stories from our experiences. Hope to see you at the next one.
 </p>
 
 <p dir="ltr">

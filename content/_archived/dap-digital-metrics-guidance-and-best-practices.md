@@ -853,8 +853,8 @@ To support this common framework, agencies should collect performance and custom
 
 ### **Communities of Practice**
 
-  * [Web and New Media Community]({{< link "web-managers-forum.md" >}})—an ad hoc group of over 3,000 federal, state, local, and tribal U.S. government employees.
-  * Metrics Community of Practice—part of the [Federal Web Managers Council]({{< link "web-managers-forum.md" >}}), an inter-agency group working to improve digital metrics.
+  * [Web and New Media Community]({{< link "web-content-managers.md" >}})—an ad hoc group of over 3,000 federal, state, local, and tribal U.S. government employees.
+  * Metrics Community of Practice—part of the [Federal Web Managers Council]({{< link "web-content-managers.md" >}}), an inter-agency group working to improve digital metrics.
   * [Social Media Performance Metrics working group]({{< link "social-media.md" >}}).
 
 ### **Training**

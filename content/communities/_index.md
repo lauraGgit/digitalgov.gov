@@ -88,8 +88,8 @@ There are more than 10,000 people participating across government in 22 areas. O
 **[Virtual/Augmented Reality]({{< link "virtual-and-augmented-reality.md" >}})**: A collaborative hub for the research and refinement of VR and AR use cases and pilot programs across government.<br/>
 [Learn&nbsp;more&nbsp;»]({{< link "virtual-and-augmented-reality.md" >}})
 
-**[Web Content Managers]({{< link "web-managers-forum.md" >}})**: Sharing ideas, challenges, lessons learned, and best practices in managing the content of government websites.<br/>
-[Learn&nbsp;more&nbsp;»]({{< link "web-managers-forum.md" >}})
+**[Web Content Managers]({{< link "web-content-managers.md" >}})**: Sharing ideas, challenges, lessons learned, and best practices in managing the content of government websites.<br/>
+[Learn&nbsp;more&nbsp;»]({{< link "web-content-managers.md" >}})
 
 ---
 

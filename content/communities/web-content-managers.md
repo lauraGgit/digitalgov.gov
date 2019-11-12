@@ -2,16 +2,16 @@
 url: /communities/web-content-managers/
 uid: web-content-managers
 date: 2013-11-21 3:31:31 -0400
-title: 'Web Content Managers Forum'
-summary: 'The Web Content Managers Forum is a community of government employees who share ideas, challenges, lessons learned, and best practices in managing the content of government websites.'
+title: 'Web Content Managers Community'
+summary: 'Where government employees share ideas, challenges, lessons learned, and best practices in managing government websites.'
 
 aliases:
   - /communities/web-managers-forum/
   - /communities/web-managers-forum/web-content-managers-listserv/
+
 ---
 
-
-If you manage a U.S. government website, or write digital content for your agency, this group is for you! Discussion topics cover content strategy, accessibility, customer experience, plain language, and more.
+If you manage a U.S. government website, or write digital content for your agency, this group is for you! We discuss a full range of topics, from 21st Century IDEA, accessibility, content strategy, customer experience, design, plain language, user-centered design and more.
 
 ### Join
 

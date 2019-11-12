@@ -306,7 +306,7 @@ Also, stay informed of advances in metrics and measurement by following organiza
 
 ## <a name="customer-satisfaction-metrics"></a>Customer Satisfaction Metrics
 
-Milestone 8.1 of the [Digital Government Strategy](http://www.whitehouse.gov/sites/default/files/omb/egov/digital-government/digital-government.html) calls for GSA’s Center for Digital Services Innovation Center to develop guidance on common customer satisfaction metrics. The following guidance was derived from extensive research of common practices in industry and government and input from the [Federal Web Metrics Community of Practice](https://www.howto.gov/communities/federal-web-managers-council/metrics) and [Federal Web Managers Council]({{< link "web-managers-forum.md" >}}).
+Milestone 8.1 of the [Digital Government Strategy](http://www.whitehouse.gov/sites/default/files/omb/egov/digital-government/digital-government.html) calls for GSA’s Center for Digital Services Innovation Center to develop guidance on common customer satisfaction metrics. The following guidance was derived from extensive research of common practices in industry and government and input from the [Federal Web Metrics Community of Practice](https://www.howto.gov/communities/federal-web-managers-council/metrics) and [Federal Web Managers Council]({{< link "web-content-managers.md" >}}).
 
 Below are minimum common baseline customer satisfaction metrics that agencies should collect for their .gov websites. They will tell you how people perceive the information and services you provide, and are generally derived from surveys or other direct interactions with your customers. As part of an effective Customer Service Strategy, you should collect, analyze, and act upon customer feedback in coordination with performance metrics.
 
@@ -852,8 +852,8 @@ To support this common framework, agencies should collect performance and custom
 
 ### **Communities of Practice**
 
-  * [Web and New Media Community]({{< link "web-managers-forum.md" >}})—an ad hoc group of over 3,000 federal, state, local, and tribal U.S. government employees.
-  * Metrics Community of Practice—part of the [Federal Web Managers Council]({{< link "web-managers-forum.md" >}}), an inter-agency group working to improve digital metrics.
+  * [Web and New Media Community]({{< link "web-content-managers.md" >}})—an ad hoc group of over 3,000 federal, state, local, and tribal U.S. government employees.
+  * Metrics Community of Practice—part of the [Federal Web Managers Council]({{< link "web-content-managers.md" >}}), an inter-agency group working to improve digital metrics.
   * [Social Media Performance Metrics working group]({{< link "social-media.md" >}}).
 
 ### **Training**
