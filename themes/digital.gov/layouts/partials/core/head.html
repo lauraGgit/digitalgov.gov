@@ -90,6 +90,23 @@
   {{ "<!-- Sitemap-->" | safeHTML }}
   <link rel="sitemap" type="application/xml" title="Digital.gov Sitemap" href="{{- "sitemap.xml" | absURL -}}" />
 
+
+  {{/*
+    Redirect DEMO
+    http://demo.digital.gov/ to http://digital.gov/?d
+  */}}
+  {{- $current := "https://digital.gov" -}}
+  {{- if eq ($.Scratch.Get "env") "site" -}}
+  {{- else }}
+    {{- if eq (printf "%v" $.Site.BaseURL) "//localhost:1313/" -}}
+    {{- else -}}
+    <meta http-equiv="refresh" content="1; url=https://digital.gov/?d">
+    <script type="text/javascript">
+      window.location.href = "https://digital.gov/?d"
+    </script>
+    {{- end -}}
+  {{- end -}}
+
   <!-- Theme Color / Browser -->
   <!-- https://developers.google.com/web/tools/lighthouse/audits/address-bar -->
   <meta name="theme-color" content="#656bd7"/>
